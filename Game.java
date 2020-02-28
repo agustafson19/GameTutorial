@@ -16,6 +16,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private Random r;
 	private Handler handler;
+	private HUD hud;
+	private Spawn spawner;
 	
 	public Game() {
 		handler = new Handler();
@@ -23,10 +25,13 @@ public class Game extends Canvas implements Runnable {
 		
 		new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
 		
+		hud = new HUD();
+		spawner = new Spawn(handler, hud);
 		r = new Random();
 		
-		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player));
-		handler.addObject(new Player(WIDTH / 2 + 64, HEIGHT / 2 - 32, ID.Player2));
+		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
+		
+		handler.addObject(new BasicEnemy(r.nextInt(WIDTH - 50), r.nextInt(HEIGHT - 50), ID.BasicEnemy, handler));
 	}
 	
 	public synchronized void start() {
@@ -46,6 +51,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public void run() {
+		this.requestFocus();
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60d;
 		double ns = 1000000000d / amountOfTicks;
@@ -75,6 +81,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private void tick() {
 		handler.tick();
+		hud.tick();
+		spawner.tick();
 	}
 	
 	private void render() {
@@ -91,8 +99,19 @@ public class Game extends Canvas implements Runnable {
 		
 		handler.render(g);
 		
+		hud.render(g);
+		
 		g.dispose();
 		bs.show();
+	}
+	
+	public static int clamp(int var, int min, int max) {
+		if (var >= max)
+			return var = max;
+		else if (var <= min)
+			return var = min;
+		else
+			return var;
 	}
 	
 	public static void main(String args[]) {
