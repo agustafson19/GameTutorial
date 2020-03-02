@@ -7,23 +7,23 @@ public class Player extends GameObject {
 	
 	private Handler handler;
 	
-	public Player(int x, int y, ID id, Handler handler) {
+	public Player(float x, float y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 32, 32);
+		return new Rectangle(Math.round(x), Math.round(y), 32, 32);
 	}
 	
 	public void tick() {
 		x += velX;
 		y += velY;
 		
-		x = Game.clamp(x, 0, Game.WIDTH - 37);
-		y = Game.clamp(y, 0, Game.HEIGHT - 60);
+		x = Game.clamp(x, 0f, Game.WIDTH - 37f);
+		y = Game.clamp(y, 0f, Game.HEIGHT - 60f);
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.WHITE, 32, 32, 0.05f, handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.WHITE, 32f, 32f, 0.05f, handler));
 		
 		collision();
 		
@@ -45,7 +45,7 @@ public class Player extends GameObject {
 	
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.fillRect(x, y, 32, 32);
+		g.fillRect(Math.round(x), Math.round(y), 32, 32);
 	}
 	
 }

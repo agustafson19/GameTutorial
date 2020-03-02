@@ -29,9 +29,10 @@ public class Game extends Canvas implements Runnable {
 		spawner = new Spawn(handler, hud);
 		r = new Random();
 		
-		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
+		handler.addObject(new Player(WIDTH / 2f - 32f, HEIGHT / 2f - 32f, ID.Player, handler));
 		
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH - 50), r.nextInt(HEIGHT - 50), ID.BasicEnemy, handler));
+		handler.addObject(new BasicEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.BasicEnemy, handler));
+		
 	}
 	
 	public synchronized void start() {
@@ -105,7 +106,7 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 	
-	public static int clamp(int var, int min, int max) {
+	public static float clamp(float var, float min, float max) {
 		if (var >= max)
 			return var = max;
 		else if (var <= min)

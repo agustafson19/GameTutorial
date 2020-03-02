@@ -10,8 +10,8 @@ public class HUD {
 	private int level = 1;
 	
 	public void tick() {
-		HEALTH = Game.clamp(HEALTH, 0, 100);
-		greenValue = Game.clamp(greenValue, 0, 255);
+		HEALTH = Math.round(Game.clamp((float) HEALTH, 0f, 100f));
+		greenValue = Math.round(Game.clamp((float) greenValue, 0f, 255f));
 		
 		greenValue = HEALTH * 2;
 		

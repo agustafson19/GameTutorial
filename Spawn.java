@@ -19,19 +19,29 @@ public class Spawn {
 		if (scoreKeep == 100) {
 			scoreKeep = 0;
 			hud.setLevel(hud.getLevel() + 1);
-			
 			if (hud.getLevel() == 2) {
-				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+				handler.addObject(new BasicEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.BasicEnemy, handler));
 			}
 			else if (hud.getLevel() == 3) {
-				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+				handler.addObject(new BasicEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.BasicEnemy, handler));
 			}
 			else if (hud.getLevel() == 4) {
-				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.FastEnemy, handler));
+				handler.addObject(new FastEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.FastEnemy, handler));
 			}
 			else if (hud.getLevel() == 5) {
-				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy, handler));
+				handler.addObject(new SmartEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.SmartEnemy, handler));
 			}
+			else if (hud.getLevel() == 6) {
+				handler.addObject(new FastEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.FastEnemy, handler));
+			}
+			else if (hud.getLevel() == 7) {
+				handler.addObject(new FastEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.FastEnemy, handler));
+			}
+			else if (hud.getLevel() == 10) {
+				handler.clearEnemies();
+				handler.addObject(new EnemyBoss((Game.WIDTH / 2f), -101f, ID.EnemyBoss, handler));
+			}
+			
 			
 		}
 	}

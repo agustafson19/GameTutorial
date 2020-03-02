@@ -7,7 +7,7 @@ public class SmartEnemy extends GameObject {
 	private Handler handler;
 	private GameObject player;
 	
-	public SmartEnemy(int x, int y, ID id, Handler handler) {
+	public SmartEnemy(float x, float y, ID id, Handler handler) {
 		super(x, y, id);
 		
 		this.handler = handler;
@@ -21,15 +21,19 @@ public class SmartEnemy extends GameObject {
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 16, 16);
+		return new Rectangle(Math.round(x), Math.round(y), 16, 16);
 	}
 	
 	public void tick() {
-		int diffX = player.getX() + 8 - x;
-		int diffY = player.getY() + 8 - y;
-		int distance = (int) Math.round(Math.sqrt(diffX*diffX+diffY*diffY));
+		float diffX = player.getX() + 8 - x;
+		float diffY = player.getY() + 8 - y;
+		float distance = (float) Math.sqrt(diffX*diffX+diffY*diffY);
 		
-		if (distance != 0) {
+		if (distance == 0f) {
+			velX = 0;
+			velY = 0;
+		}
+		else {
 			velX = diffX / distance;
 			velY = diffY / distance;
 		}
@@ -37,15 +41,15 @@ public class SmartEnemy extends GameObject {
 		x += velX;
 		y += velY;
 		
-		if (x <= 0 || x >= Game.WIDTH - 16) velX *= -1;
-		if (y <= 0 || y >= Game.HEIGHT - 32) velY *= -1;
+		if (x <= 0f || x >= Game.WIDTH - 16f) velX *= -1f;
+		if (y <= 0f || y >= Game.HEIGHT - 32f) velY *= -1f;
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.GREEN, 16, 16, 0.02f, handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.GREEN, 16f, 16f, 0.02f, handler));
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(Color.GREEN);
-		g.fillRect(x, y, 16, 16);
+		g.fillRect(Math.round(x), Math.round(y), 16, 16);
 	}
 	
 }
