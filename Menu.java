@@ -10,11 +10,13 @@ public class Menu extends MouseAdapter {
 	
 	private Game game;
 	private Handler handler;
+	private HUD hud;
 	private Random r = new Random();
 	
-	public Menu(Game game, Handler handler) {
+	public Menu(Game game, Handler handler, HUD hud) {
 		this.game = game;
 		this.handler = handler;
+		this.hud = hud;
 	}
 	
 	public void mousePressed(MouseEvent e) {
@@ -26,6 +28,7 @@ public class Menu extends MouseAdapter {
 			if (mouseOver(mx, my, 210, 150, 200, 64)) {
 				game.gameState = Game.STATE.Game;
 				handler.addObject(new Player(Game.WIDTH / 2f - 32f, Game.HEIGHT / 2f - 32f, ID.Player, handler));
+				handler.clearEnemies();
 				handler.addObject(new BasicEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.BasicEnemy, handler));
 			}
 			
@@ -44,6 +47,16 @@ public class Menu extends MouseAdapter {
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				game.gameState = Game.STATE.Menu;
 				return;
+			}
+		}
+		//Try Atain Button in Game Over
+		if (game.gameState == Game.STATE.End) {
+			if (mouseOver(mx, my, 210, 350, 200, 64)) {
+				hud.setLevel(1);
+				hud.setScore(0);
+				game.gameState = Game.STATE.Game;handler.addObject(new Player(Game.WIDTH / 2f - 32f, Game.HEIGHT / 2f - 32f, ID.Player, handler));
+				handler.clearEnemies();
+				handler.addObject(new BasicEnemy(r.nextFloat()*(Game.WIDTH - 50f), r.nextFloat()*(Game.HEIGHT - 50f), ID.BasicEnemy, handler));
 			}
 		}
 	}
@@ -66,13 +79,13 @@ public class Menu extends MouseAdapter {
 	}
 	
 	public void render(Graphics g) {
-		if (game.gameState ==Game.STATE.Menu) {
+		if (game.gameState == Game.STATE.Menu) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			
 			g.setFont(fnt);
 			g.setColor(Color.WHITE);
-			g.drawString("Menu", 240, 70);
+			g.drawString("Wave", 240, 70);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 150, 200, 64);
@@ -99,6 +112,22 @@ public class Menu extends MouseAdapter {
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back",270, 390);
+		}
+		else if (game.gameState == Game.STATE.End) {
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 30);
+			Font fnt3 = new Font("arial", 1, 20);
+			
+			g.setFont(fnt);
+			g.setColor(Color.WHITE);
+			g.drawString("Game Over", 280, 70);
+			
+			g.setFont(fnt3);
+			g.drawString("You lost with a score of: " + hud.getScore(), 175, 200);
+			
+			g.setFont(fnt2);
+			g.drawRect(210, 350, 200, 64);
+			g.drawString("Try Again",245, 390);
 		}
 	}
 	

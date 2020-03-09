@@ -16,7 +16,7 @@ public class Handler {
 	public void render(Graphics g) {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
-			
+		
 			tempObject.render(g);
 		}
 	}
@@ -24,7 +24,10 @@ public class Handler {
 	public void clearEnemies() {
 		for (int i = object.size() - 1; i >= 0; i--) {
 			GameObject tempObject = object.get(i);
-			if (tempObject.getId() != ID.Player) removeObject(tempObject);
+			if (tempObject.getId() == ID.Player) {
+				object.clear();
+				addObject(new Player((int) tempObject.getX(), (int) tempObject.getY(), ID.Player, this));
+			}
 		}
 	}
 	
