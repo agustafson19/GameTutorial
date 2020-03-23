@@ -31,7 +31,9 @@ public class Handler {
 				GameObject tempObject = object.get(i);
 				if (tempObject.getId() == ID.Player) {
 					object.clear();
-					addObject(new Player((int) tempObject.getX(), (int) tempObject.getY(), ID.Player, this));
+					if (Game.gameState != Game.STATE.End) {
+						addObject(new Player((int) tempObject.getX(), (int) tempObject.getY(), ID.Player, this));
+					}
 				}
 			}
 		}catch(Exception e){System.out.println("Problem clearing enemies.");}
