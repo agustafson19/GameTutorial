@@ -1,6 +1,7 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.awt.image.BufferStrategy;
 
 import java.util.Random;
@@ -36,6 +37,8 @@ public class Game extends Canvas implements Runnable {
 	
 	public static STATE gameState = STATE.Menu;
 	
+	public static BufferedImage sprite_sheet;
+	
 	public Game() {
 		handler = new Handler();
 		hud = new HUD();
@@ -45,10 +48,14 @@ public class Game extends Canvas implements Runnable {
 		
 		AudioPlayer.load();
 		
-		//UNCOMMENT FOR MUSIC
+		//MUSIC
 		//AudioPlayer.getMusic("music").loop();
 		
 		new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
+		
+		BufferedImageLoader loader = new BufferedImageLoader();
+		
+		sprite_sheet = loader.loadImage("sprite_sheet.png");
 		
 		spawner = new Spawn(handler, hud, this);
 		r = new Random();
