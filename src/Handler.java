@@ -5,6 +5,8 @@ public class Handler {
 	
 	LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
+	public int speed = 5;
+	
 	public void tick() {
 		try {
 			for (int i = 0; i < object.size(); i++) {
@@ -12,7 +14,7 @@ public class Handler {
 				
 				tempObject.tick();
 			}
-		}catch(Exception e){System.out.println("Problem with object's tick");}
+		}catch(Exception e){}
 	}
 	
 	public void render(Graphics g) {
@@ -22,7 +24,7 @@ public class Handler {
 			
 				tempObject.render(g);
 			}
-		}catch(Exception e){System.out.println("Problem rendering object");}
+		}catch(Exception e){}
 	}
 	
 	public void clearEnemies() {
@@ -36,7 +38,7 @@ public class Handler {
 					}
 				}
 			}
-		}catch(Exception e){System.out.println("Problem clearing enemies.");}
+		}catch(Exception e){}
 	}
 	
 	public void addObject(GameObject object) {

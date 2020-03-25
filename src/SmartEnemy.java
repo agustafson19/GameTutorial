@@ -51,13 +51,13 @@ public class SmartEnemy extends GameObject {
 		if (x <= 0f || x >= Game.WIDTH - 16f) velX *= -1f;
 		if (y <= 0f || y >= Game.HEIGHT - 32f) velY *= -1f;
 		
-		//handler.addObject(new Trail(x, y, ID.Trail, Color.GREEN, 16f, 16f, 0.02f, handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.GREEN, 16f, 16f, 0.02f, handler));
 	}
 	
 	public void render(Graphics g) {
-		//g.setColor(Color.GREEN);
-		//g.fillRect(Math.round(x), Math.round(y), 16, 16);
-		g.drawImage(enemy_image, Math.round(x), Math.round(y), null);
+		g.setColor(Color.GREEN);
+		g.fillRect(Math.round(x), Math.round(y), 16, 16);
+		//g.drawImage(enemy_image, Math.round(x), Math.round(y), null);
 	}
 	
 }

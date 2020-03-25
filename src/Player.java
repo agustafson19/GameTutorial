@@ -33,7 +33,7 @@ public class Player extends GameObject {
 		x = Game.clamp(x, 0f, Game.WIDTH - 37f);
 		y = Game.clamp(y, 0f, Game.HEIGHT - 60f);
 		
-		//handler.addObject(new Trail(x, y, ID.Trail, Color.WHITE, 32f, 32f, 0.05f, handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.WHITE, 32f, 32f, 0.05f, handler));
 		
 		collision();
 		
@@ -54,9 +54,9 @@ public class Player extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		//g.setColor(Color.WHITE);
-		//g.fillRect(Math.round(x), Math.round(y), 32, 32);
-		g.drawImage(player_image, Math.round(x), Math.round(y), null);
+		g.setColor(Color.WHITE);
+		g.fillRect(Math.round(x), Math.round(y), 32, 32);
+		//g.drawImage(player_image, Math.round(x), Math.round(y), null);
 	}
 	
 }

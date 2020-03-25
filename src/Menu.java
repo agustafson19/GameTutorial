@@ -20,6 +20,8 @@ public class Menu extends MouseAdapter {
 	}
 	
 	public void mousePressed(MouseEvent e) {
+		//System.out.println("Mouse Clicked");
+		
 		int mx = e.getX();
 		int my = e.getY();
 		
